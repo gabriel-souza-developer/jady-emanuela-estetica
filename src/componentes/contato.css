@@ -1,0 +1,77 @@
+.contato {
+  background: var(--cor-fundo-alt);
+  padding: clamp(3.5rem, 9vw, 6rem) clamp(1.25rem, 5vw, 3.5rem) clamp(2rem, 5vw, 3rem);
+  text-align: center;
+}
+
+.contato__caixa {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.contato__titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin: 0 0 0.75rem;
+  color: var(--cor-texto);
+}
+
+.contato__texto {
+  font-size: 1.05rem;
+  color: var(--cor-texto-suave);
+  margin: 0 0 1.75rem;
+}
+
+.contato .botao-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  background: linear-gradient(100deg, var(--cor-esmeralda-escura), var(--cor-esmeralda));
+  color: #fff;
+  font-weight: 600;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 25px -10px rgba(11, 122, 88, 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contato .botao-whatsapp:hover,
+.contato .botao-whatsapp:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px -10px rgba(11, 122, 88, 0.65);
+}
+
+.botao-whatsapp__icone {
+  width: 20px;
+  height: 20px;
+}
+
+.contato__redes {
+  margin-top: 1.75rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+}
+
+.contato__redes a {
+  text-decoration: none;
+  color: var(--cor-texto-suave);
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.contato__redes a:hover,
+.contato__redes a:focus-visible {
+  color: var(--cor-esmeralda-escura);
+  border-color: var(--cor-esmeralda-escura);
+}
+
+.contato__rodape {
+  margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+}

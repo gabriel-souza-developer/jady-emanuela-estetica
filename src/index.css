@@ -1,0 +1,81 @@
+@import "./motor/motor.css";
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("./assets/fonts/fraunces-variable.woff2") format("woff2-variations");
+  font-weight: 300 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/inter-variable.woff2") format("woff2-variations");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tokens extraídos da logo real (amostragem de pixel do arquivo
+ * assets/img/logo-jady-emanuela.png), não inventados. Papéis definidos
+ * em DESIGN-SYSTEM.md (próxima etapa); aqui só os valores. */
+:root {
+  --cor-esmeralda: #0ea978;
+  --cor-esmeralda-escura: #0b7a58;
+  --cor-esmeralda-clara: #6fd9b8;
+  --cor-rose: #b07d6e;
+  --cor-rose-clara: #e3bfae;
+  --cor-rose-texto: #8f5c4e; /* mesma família do dourado-rosé, escurecida só para
+    texto pequeno: --cor-rose sozinha fica em ~3.3:1 sobre --cor-fundo, abaixo do
+    mínimo AA (4.5:1) para texto normal; esta variante fica em ~5.2:1 */
+  --cor-fundo: #fbf8f2;
+  --cor-fundo-alt: #f3ece1;
+  --cor-texto: #2a2622;
+  --cor-texto-suave: #6b645c;
+
+  --fonte-titulo: "Fraunces", ui-serif, Georgia, serif;
+  --fonte-corpo: "Inter", system-ui, sans-serif;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-corpo);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.pular {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--cor-esmeralda-escura);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 0.5rem 0;
+  z-index: 100;
+}
+
+.pular:focus {
+  left: 0;
+}

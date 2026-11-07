@@ -1,0 +1,10 @@
+Fraunces (variável) e Inter (variável) — Google Fonts, licenciadas sob a
+SIL Open Font License 1.1 (https://openfontlicense.org/).
+
+Uso neste projeto: arquivos .woff2 baixados uma vez de fonts.gstatic.com e
+hospedados localmente nesta pasta (sem requisição em tempo de execução a
+fonts.googleapis.com ou fonts.gstatic.com), conforme a regra do motor de
+fontes locais.
+
+- Fraunces: https://github.com/undercasetype/Fraunces
+- Inter: https://github.com/rsms/inter
