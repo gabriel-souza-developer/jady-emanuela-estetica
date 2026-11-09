@@ -74,11 +74,6 @@
   justify-items: start;
 }
 
-.contato__telefone {
-  font-size: 0.9rem;
-  color: var(--cor-texto-suave);
-}
-
 @media (min-width: 900px) {
   .contato__grade {
     grid-template-columns: 1fr 1fr;

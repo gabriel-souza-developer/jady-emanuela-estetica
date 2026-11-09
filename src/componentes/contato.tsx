@@ -3,7 +3,7 @@ import fotoSorriso from "../assets/img/banco/sorriso.jpg";
 import fotoRolo from "../assets/img/banco/rolo-jade.jpg";
 import fotoGuaSha from "../assets/img/banco/gua-sha.jpg";
 import { IconeWhatsapp } from "./icone-whatsapp";
-import { INSTAGRAM, INSTAGRAM_ARROBA, LINKTREE, TELEFONE_LEGIVEL, whatsapp } from "../dados";
+import { INSTAGRAM, INSTAGRAM_ARROBA, LINKTREE, whatsapp } from "../dados";
 import "./contato.css";
 
 export function Contato() {
@@ -30,7 +30,6 @@ export function Contato() {
                 <IconeWhatsapp />
                 Agendar pelo WhatsApp
               </a>
-              <p className="contato__telefone">WhatsApp {TELEFONE_LEGIVEL}</p>
             </div>
           </div>
         </div>
