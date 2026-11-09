@@ -1,0 +1,5 @@
+# [PREENCHER] Troque SEU-DOMINIO-AQUI pelo domínio real antes de publicar o site.
+User-agent: *
+Allow: /
+
+Sitemap: https://SEU-DOMINIO-AQUI/sitemap.xml
