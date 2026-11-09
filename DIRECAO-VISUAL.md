@@ -49,6 +49,45 @@ Quatro referências observadas visualmente (capturas Playwright reais, exceto a 
 - Componentes escolhidos, biblioteca, finalidade e alternativas descartadas: a decidir em `DESIGN-SYSTEM.md` (Flowbite vs daisyUI) depois de fechar a direção com o usuário; não presumir agora.
 - Materiais ou informações ainda necessários: fotos reais da clínica/procedimentos (pendência do BRIEF), confirmação do profissional responsável pelos injetáveis antes de construir essa seção, conteúdo do Canva/Heyzine se for usado, endereço/bairro para contexto local.
 
+## Refinamentos sobre a Direção A (2026-11-08)
+
+A pedido do usuário, revisitei `inspiracoes/beleza-portfolio-referencia/camila-ingridy-1200.webp`
+(salão "Camila Ingridy") pra ver o que valia aproveitar como princípio, sem copiar composição/
+cor/texto/foto — e sem o padrão de grade de 6 cartões iguais, que o motor já proíbe. Quatro
+princípios aplicados (detalhes e tokens em `DESIGN-SYSTEM.md`): marca-d'água do selo/halo
+estendida pra página inteira, ícone de diamante próprio (proporção da logo real) como marcador
+recorrente de título, um divisor em curva só na transição hero → Facial (não repetido em excesso),
+e rodapé convertido em cartão flutuante arredondado em vez de faixa reta. Revisão visual real
+confirmou que a Direção A continua coerente depois dessas mudanças — são reforços da mesma
+assinatura, não uma direção nova.
+
+## Revisão pós-feedback do cliente (2026-11-07)
+
+Feedback direto do usuário, visualizando a página já com os refinamentos acima: "não gostei do
+hero, imagem/logo muito grande. Também sinto que design system precisa ser refeito, use uma
+biblioteca de imagens grátis, mude todo o layout e componentes do hero até o footer".
+
+O selo de 512px/60vw da Direção A original (item acima, "Abertura e hierarquia") dominava a dobra
+inteira — na prática, maior do que o pretendido na direção escolhida. Em vez de abandonar a
+Direção A, corrigi a execução dela: o selo deixa de ser o elemento dominante e vira um distintivo
+pequeno (56px) sobre uma foto de banco gratuito, que passa a ocupar o papel visual que o selo
+ampliado tinha. Isso mantém a assinatura "selo e luz" (o selo continua lá, com halo de cor da
+marca por trás da foto), só muda a escala e o que preenche o painel principal.
+
+- **Fotos escolhidas:** banco gratuito Unsplash (licença padrão, uso comercial livre), nunca
+  Unsplash+ (pago). Critério novo, registrado nesta revisão: só foto genérica de ação (mãos em
+  tratamento), nunca foto de interior/fachada real de outra clínica (seria enganoso apresentar
+  como se fosse o espaço da Jady) nem foto que exponha marca concorrente legível. Processo de
+  busca e descartes em `src/assets/img/banco/CREDITOS-FOTOS.md`.
+- **Hero:** ver detalhe técnico em `DESIGN-SYSTEM.md`, seção "Revisão pós-feedback do cliente".
+- **Componentes hero → footer:** `FaixaTratamento` ganhou suporte a foto opcional (usada em
+  Corporal); Contato/rodapé revisado e mantido como está, já alinhado aos mesmos tokens do novo
+  hero (cartão arredondado, marca-d'água, paleta) da revisão anterior — não havia nada a
+  destoar da nova direção ali.
+- **Direção:** continua Direção A ("Selo e luz"), não uma direção nova — o próprio usuário não
+  pediu uma identidade diferente, só rejeitou a escala do selo e pediu fotos reais de banco em
+  vez de depender só do selo/halo como imagem.
+
 ## Wireframe e revisão da primeira dobra
 - Wireframe desktop e celular: `WIREFRAME.md` — preenchido, Direção A aplicada.
 - Resultado observado no navegador em desktop: selo real ampliado com halo emerald/dourado-rosé, nav só-texto, título serifado com gradiente de marca, CTA de WhatsApp visível sem rolar; abertura ocupa a altura inicial da tela (ajustado depois de uma primeira observação com espaço vazio excessivo). Screenshot real via Playwright (container Docker auxiliar), não só leitura de código.
@@ -57,3 +96,23 @@ Quatro referências observadas visualmente (capturas Playwright reais, exceto a 
 - Revisão independente da primeira dobra por outro agente, quando disponível, e ajustes: **feita** (agente separado, página completa já construída). Achado real: `.heroi__assinatura` usava `--cor-rose` com contraste ≈3,3:1 sobre o fundo — abaixo do mínimo AA (4,5:1) para texto pequeno. Corrigido com um novo token `--cor-rose-texto` (≈5,2:1), aplicado só nesse rótulo; o uso de `--cor-rose` no título grande continua correto (texto ≥36px só precisa de 3:1). Revisão também corrigiu uma suposição de método de QA equivocada (ver `WIREFRAME.md`): captura `fullPage` produz artefatos de composição nesta máquina sem GPU mesmo com `reducedMotion`, então a confirmação real usou rolagem programática — ordem, conteúdo e comportamento de todas as seções (desktop, celular, reduced-motion) foram confirmados corretos.
 - Restante da página (Facial, Corporal, Capilar, Kit Home Care, Contato): construído e revisado com screenshots reais (desktop, celular, reduced-motion) — detalhes em `WIREFRAME.md`, seção "Revisão da página inteira". Ritmo alternado confirmado, sem grade de cartões repetida; rodapé com WhatsApp/Instagram/Linktree reais, sem endereço/horário (pendência do cliente). Injetáveis/Botox e depoimentos continuam fora da página.
 - Design system documentado em `DESIGN-SYSTEM.md` e tokens aplicados: **feito** — cores (com papéis e conferência de contraste), tipografia, espaçamento, grid, bordas, componentes, foco/acessibilidade e movimento reduzido documentados a partir dos valores reais já implementados no código.
+
+## Redesenho de 2026-11-09: "Arco esmeralda"
+
+> Atualização (mesmo dia): o arco em todas as fotos ficou com "cara de IA" para o usuário. Virou a
+> lapidação esmeralda (cantos chanfrados, cortes diferentes por uso, engaste rosé), ligada ao
+> diamante da logo e ao nome da cor principal.
+
+Pedido do usuário: layout anterior reprovado, faltavam imagens (banco gratuito), manter só a paleta.
+Fontes consultadas com navegador real (Playwright), capturas em `verificacao/jady-redesign/pesquisa/`:
+
+| Fonte | Exemplo aberto | O que foi visto | Princípio aproveitado | Descartado |
+|---|---|---|---|---|
+| supahero.io | https://supahero.io/hero/casa-lunara | Foto ocupando a dobra inteira, marca centralizada no alto, título serifado grande sobre a foto | Foto como palco e tipografia serifada em escala como protagonista | Grafite, arcos arquitetônicos da foto, tom de moda |
+| navbar.gallery | https://www.navbar.gallery/navbar/aveon | Menu em painel claro com links grandes em lista e bloco de contato separado, ao lado de foto | Menu do celular com links grandes + contato no mesmo painel | Painel lateral em tela cheia (pesado para uma página curta) |
+| supahero.io (página inicial) | https://supahero.io/ | Grade de heróis: Treize Grammes (título serifado em bloco sobre escuro), Wope, Zed | Contraste de uma única faixa escura no meio de página clara | Estética de SaaS (prints de painel) |
+
+Escolha: abertura em foto inteira com véu floresta, uma cena presa como pico, uma faixa escura e
+arco como forma única. Comparação com `construcoes.md`: difere de todos os projetos anteriores em
+abertura (foto inteira com título sobreposto), pico (cena presa com troca de foto por etapa),
+assinatura (frase com fotos em cápsula), paleta (esmeralda/rosé da logo) e estrutura.

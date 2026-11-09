@@ -32,6 +32,7 @@ Pendentes (NÃO vão para a página: ficam só na lista de pendências da entreg
 - Avaliações reais do Google (nota/quantidade), se existirem
 - Conteúdo do folder "Facial, Corporal e Tricologia" (link Canva não pôde ser lido automaticamente — é renderizado em JS/imagem) e do catálogo "Kit Home Care" (flipbook Heyzine, mesmo problema) — pedir o texto/PDF de origem direto ao cliente se quiser usar esse conteúdo
 - Fotos reais da clínica/fachada/equipe (a cliente mencionou foto da fachada com a logo no Google, mas a busca não localizou o perfil — pedir link direto ou as fotos)
+- Fotos do Instagram: tentativa de ver a grade de posts por captura de tela (container Playwright, sem login, 2026-11-07) bateu direto numa tela de login do Instagram (`Entrar no Instagram`) — nenhuma foto da clínica ficou visível, nenhum link de post foi encontrado. Instagram exige login até pra ver o perfil público neste tipo de acesso automatizado; não tentamos contornar (sem criar conta, sem usar credenciais). Pedir as fotos direto à cliente (arquivos originais) continua sendo o caminho confiável.
 
 ## 3. Conformidade
 - Perfil: **nicho sem perfil pronto no catálogo interno — aplica-se o caso "Botox/injetáveis"**, que no Brasil normalmente exige identificação do profissional responsável (biomédico com CRBM, enfermeiro com COREN, ou médico com CRM, dependendo de quem aplica) e segue restrições de publicidade de procedimento estético (sem promessa de resultado, sem comparação agressiva, antes/depois com contexto). **Não construir a seção de Botox/injetáveis sem essa confirmação do cliente.**
@@ -65,3 +66,14 @@ Comparar com `construcoes.md`: diferir em pelo menos 3 de 5 (abertura · pico ·
 - Fotos reais: nenhuma obtida ainda (fachada mencionada pela cliente está no Google, mas a busca automática não achou o perfil — pedir link direto ou fotos)
 - Vídeo: nenhum
 - Logo: `src/assets/img/logo-jady-emanuela.png` (512×512, baixado do Google em alta resolução a partir do link enviado pela cliente)
+
+## Redesenho de 2026-11-09: pendências novas para confirmar com a cliente
+
+- Textos dos tratamentos foram escritos em termos gerais (sem procedimento, aparelho, preço ou
+  promessa). Confirmar se a cliente aprova o tom e mandar a lista real de protocolos.
+- Kit Home Care descrito como "nossa linha": confirmar que é linha própria. Pedir o link do
+  catálogo (Heyzine) para trocar o "peça pelo WhatsApp" por um link direto.
+- Ultramed e Lumine continuam fora até a cliente explicar o que são.
+- Fotos são ilustrativas (Burst/Shopify e uma do Unsplash, créditos em
+  `src/assets/img/banco/CREDITOS-FOTOS.md`). Trocar por fotos reais da clínica quando chegarem.
+- `public/aviso-privacidade.html` ainda tem campos `[PREENCHER]` (controlador e e-mail).

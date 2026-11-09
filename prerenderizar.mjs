@@ -1,18 +1,7 @@
 #!/usr/bin/env node
-/* Pré-renderização estática: roda depois de `vite build`.
- *
- * Um SPA React puro só existe depois que o JS executa no navegador — sem
- * JS, dist/index.html fica vazio, o que viola a regra do motor de página
- * legível sem JS. Este script abre o próprio dist/ já compilado, espera o
- * React montar, e grava o HTML já renderizado de volta em dist/index.html.
- * O <script type="module"> original continua no HTML final: o JS ainda
- * carrega e assume a página (efeitos do motor, futura interatividade);
- * sem JS, o conteúdo já chega pronto.
- *
- * Reaproveita o detector de navegador do motor (scripts/lib/navegador.mjs),
- * por isso depende da posição deste arquivo dentro do repositório: dois
- * níveis abaixo da raiz (adaptadores/react-vite/ ou projetos/<slug>/).
- */
+/* Pré-renderização: depois do vite build, grava em dist/index.html o HTML já
+ * montado pelo React, para a página ser legível sem JS. Usa
+ * scripts/lib/navegador.mjs, dois níveis acima. */
 import { readFileSync, writeFileSync } from "node:fs";
 import { createServer } from "node:http";
 import { extname, join, dirname } from "node:path";
@@ -71,13 +60,7 @@ try {
     erros.forEach((e) => console.error(" -", e));
     process.exitCode = 1;
   } else {
-    // As classes fx-js/fx-pronto/fx-em-cena são adicionadas pelo motor em
-    // tempo real (script inline + motor.js) conforme a rolagem. Se ficarem
-    // gravadas no HTML estático, um visitante sem JS herda "fx-js" sem
-    // nunca ganhar "fx-em-cena" de volta: o conteúdo existe no HTML mas
-    // fica com opacity:0 para sempre. Por isso o snapshot volta ao estado
-    // "antes do JS rodar": sem essas classes, o motor as adiciona de novo
-    // do zero a cada carregamento real, com ou sem JS.
+    // Remove as classes do motor para o HTML estático não nascer invisível sem JS.
     const html = await pagina.evaluate(() => {
       document.documentElement.classList.remove("js", "fx-js", "fx-pronto", "fx-reduzido");
       document.querySelectorAll(".fx-em-cena").forEach((el) => el.classList.remove("fx-em-cena"));
@@ -88,7 +71,8 @@ try {
       });
       return "<!doctype html>\n" + document.documentElement.outerHTML;
     });
-    writeFileSync(join(dist, "index.html"), html);
+    // Com base relativa, o Vite resolve as imagens para a URL do servidor local.
+    writeFileSync(join(dist, "index.html"), html.replaceAll(`http://127.0.0.1:${porta}/`, "./"));
     console.log("Pré-renderizado: dist/index.html agora tem HTML real, legível sem JS.");
   }
 } finally {

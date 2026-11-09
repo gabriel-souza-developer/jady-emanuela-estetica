@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
-import { Heroi } from './componentes/hero'
-import { FaixaTratamento } from './componentes/faixa-tratamento'
+import { Heroi } from './componentes/heroi'
+import { Manifesto } from './componentes/manifesto'
+import { Tratamentos } from './componentes/tratamentos'
+import { Especialidade } from './componentes/especialidade'
 import { Contato } from './componentes/contato'
-import { WhatsappFlutuante } from './componentes/whatsapp-flutuante'
+import { AcoesFlutuantes } from './componentes/acoes-flutuantes'
+import { TELEFONE_LEGIVEL, whatsapp } from './dados'
 
 function App() {
   useEffect(() => {
@@ -13,17 +16,13 @@ function App() {
     <>
       <a className="pular" href="#conteudo">Ir para o conteúdo</a>
       <Heroi />
-      <FaixaTratamento id="facial" titulo="Facial" acento="esmeralda" />
-      <FaixaTratamento id="corporal" titulo="Corporal" acento="rose" reverso />
-      <FaixaTratamento id="capilar" titulo="Capilar e Tricologia" acento="esmeralda" />
-      {/* Injetáveis/Botox: bloqueado. Não construir sem a cliente confirmar o
-          profissional responsável e o conselho (CRM/COREN/CRBM) — BRIEF.md
-          seção 3. */}
-      <FaixaTratamento id="kit-home-care" titulo="Kit Home Care" acento="rose" reverso />
-      {/* Depoimentos/avaliações: sem avaliação real confirmada ainda (BRIEF.md
-          seção 2) — seção não construída. */}
-      <Contato />
-      <WhatsappFlutuante />
+      <main id="conteudo">
+        <Manifesto />
+        <Tratamentos />
+        <Especialidade />
+        <Contato />
+      </main>
+      <AcoesFlutuantes whatsapp={whatsapp('Olá! Vim pelo site.')} numero={TELEFONE_LEGIVEL} topo="#inicio" />
     </>
   )
 }

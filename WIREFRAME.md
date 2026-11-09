@@ -1,34 +1,31 @@
-# Wireframe
+# Wireframe ("Lapidação esmeralda", 2026-11-09)
 
-Preencher antes da construção completa. Critérios: referencias/direcao-visual.md.
-Direção aplicada: **Direção A — "Selo e luz"** (`DIRECAO-VISUAL.md`).
+Substitui o wireframe da Direção A ("Selo e luz"), que está no git (commit `b2487fb`).
 
 ## Desktop
-- Ordem, objetivo e conteúdo das seções:
-  1. **Cabeçalho** — selo pequeno + nome, nav só-texto (Facial · Corporal · Capilar · Contato), sem botões. Âncoras para as seções 3 a 6 abaixo (ainda não existem — reservadas).
-  2. **Abertura (implementada nesta etapa)** — selo real ampliado com halo de luz emerald/dourado-rosé, título serifado com a tagline real, subtítulo com o texto real do Linktree, CTA "Agendar pelo WhatsApp" (número real confirmado no BRIEF) + nota de cidade, indicador de rolagem.
-  3. **Facial (estrutura implementada nesta etapa)** — título real da categoria + nota honesta de conteúdo pendente, sem texto de procedimento inventado (conteúdo real do folder Canva ainda pendente do cliente — ver BRIEF seção 2).
-  4. **Corporal (estrutura implementada)** — mesma lógica, invertida (painel à esquerda, texto à direita) pra alternar o ritmo.
-  5. **Capilar/Tricologia (estrutura implementada)** — mesma lógica, volta ao padrão texto-esquerda/painel-direita.
-  6. **Injetáveis/Botox** — **bloqueada, não construída**: nem título nem seção visível existem no código ainda, só um comentário em `App.tsx` apontando a pendência. Só pode ser construída depois que o cliente confirmar o profissional responsável e seu conselho (CRM/COREN/CRBM), conforme `BRIEF.md` seção 3.
-  7. **Kit Home Care (estrutura implementada nesta etapa)** — nome real do produto como título; sem descrição de produto (catálogo Heyzine pendente) — nota honesta "conteúdo detalhado chega em breve" no lugar de copy inventada.
-  8. **Depoimentos/avaliações** — **não construída**: sem avaliação real confirmada (BRIEF: ainda não encontrada).
-  9. **Contato/rodapé (implementada nesta etapa)** — WhatsApp, Instagram (@clinicajadyemanuela) e Linktree, todos reais e confirmados no BRIEF.md. Endereço e horário **ficam fora** do rodapé por decisão: são pendência (BRIEF.md seção 2) e mostrar "a confirmar" pareceria um dado real incompleto; melhor omitir até a cliente confirmar do que fingir informação parcial. Botão de WhatsApp flutuante persistente (convenção real do nicho, observada em Frame SB; mesmo padrão já usado em `hospital-day-mais-vida-v2`) implementado em todas as seções via `src/componentes/whatsapp-flutuante.tsx`.
-- Hierarquia, proporções e pontos de ação: abertura ocupa a altura visível inicial (`min-height: calc(100svh - cabeçalho)`), título > subtítulo > CTA em peso decrescente; selo é o único elemento de imagem (sem foto de banco), ampliado à direita como contrapeso visual ao bloco de texto à esquerda. Ação primária (WhatsApp) sempre visível sem rolar.
+
+1. **Abertura (100svh):** foto de ponta a ponta, véu floresta da esquerda e de baixo. Cabeçalho por
+   cima: logo + nome, Tratamentos · Clareamento corporal · Contato, botão "Agendar". Título em duas
+   linhas ("Brilhe por você." / "Do seu jeito natural.") com a segunda em rosé claro; frase curta;
+   "Agendar pelo WhatsApp" + "Ver tratamentos".
+2. **Propósito:** foto em lapidação esmeralda (cantos chanfrados) com engaste rosé deslocado e círculo menor sobreposto; ao lado, "Realçar a sua beleza natural.",
+   parágrafo sobre a clínica e a assinatura "Brilhe por você!".
+3. **Tratamentos (pico):** título "O que cuidamos" + frase curta; abas com nomes numerados à esquerda
+   e foto lapidada (corte grande) + texto + botão de WhatsApp ao lado. Facial, Corporal, Massagens, Capilar e
+   Tricologia, Kit Home Care.
+4. **Especialidade (faixa escura):** "Clareamento corporal." em escala grande, texto e "Tirar
+   dúvidas"; foto lapidada com engaste rosé fino à direita.
+5. **Agende:** colagem com duas lapidações de cortes diferentes e um círculo à esquerda, título "Vamos marcar o seu momento?", CTA e número.
+6. **Rodapé floresta:** logo, "Brilhe por você!", WhatsApp, Instagram, Linktree e aviso de
+   privacidade.
 
 ## Celular
-- Ordem, adaptação e pontos de ação: mesma ordem de seções; cabeçalho e nav quebram em linha única (4 links cabem sem menu hambúrguer neste número reduzido de itens); abertura empilha texto → CTA → selo (selo depois do texto, não antes, para não empurrar a ação de contato para baixo da dobra); textos centralizados; CTA do WhatsApp mantém o mesmo peso visual do desktop.
 
-## Acessibilidade e movimento
-- Conteúdo e navegação sem JavaScript: estrutura é HTML real (não depende de estado React para aparecer); segue o mesmo contrato do motor (`motor/motor.js`/`motor/motor.css` copiados para `src/motor/`): elementos com `data-fx` só ficam ocultos quando `<html>` recebe a classe `fx-js` via script inline no `<head>`, então sem JS tudo aparece no estado final. A validação real desse comportamento (desligando JS de verdade) depende do build com pré-renderização, que fica para quando o usuário pedir o build — não fizemos isso nesta etapa, por decisão registrada em `AGENTS.md`.
-- Movimento do motor e alternativa reduzida: `data-fx="surgir"` no título/subtítulo/CTA (fade + leve subida), `data-fx="subir"` no título, `data-fx="crescer"` no selo; indicador de rolagem usa um pulso CSS próprio (`@keyframes rolar-pulso`) desligado por `prefers-reduced-motion` e também quando `fx-js` não está presente. Confirmado visualmente: screenshot com `reducedMotion: reduce` ficou idêntico ao normal (nenhuma diferença de layout; a única animação é o pulso da linha de rolagem, imperceptível em uma captura estática, mas a regra CSS que a desliga foi conferida no código).
+Mesma ordem. Cabeçalho com logo + nome + botão "Menu". Abertura com o texto logo abaixo do
+cabeçalho, sobre o verde, e a foto lapidada depois. Tratamentos em lista corrida: miniatura lapidada (corte pequeno), número, nome, chamada, texto e link.
+WhatsApp flutuante com a seta "voltar ao topo" acima.
 
-## Primeira dobra
-- Observação no navegador em desktop e celular: implementada em `src/componentes/hero.tsx` + `hero.css`, servida via `npm run dev` e observada com screenshots reais (Playwright num container Docker auxiliar, mesma técnica já usada no projeto, com acesso à rede do container `claude-code`) em 1440×900 e 390×844. Resultado: composição fiel à Direção A (selo real ampliado com halo emerald/dourado-rosé, nav só-texto, título serifado com destaque em gradiente nas cores da marca, CTA de WhatsApp visível sem rolar). Dois ajustes foram feitos depois da primeira observação: (1) a abertura tinha espaço vazio excessivo abaixo do conteúdo (fold sem altura definida) — corrigido com `min-height` relativo à viewport; (2) o halo ao redor do selo estava fraco demais para o "leve brilho" pedido na direção — aumentado o blur e a opacidade. No celular, a frase "Estética avançada em Belo Horizonte" quebrava linha entre "Belo" e "Horizonte" — corrigido com espaço inseparável, agora quebra entre "em" e "Belo Horizonte".
-- Revisão independente quando disponível e ajustes: feita nesta etapa (agente separado, página completa já com Facial/Corporal/Capilar/Kit Home Care/Contato construídos). Verificação em desktop (1440×900), celular (390×844) e `prefers-reduced-motion: reduce`, por captura de rolagem real (não `fullPage`, que produz artefatos de composição nesta máquina sem GPU — ver nota em `DESIGN-SYSTEM.md`). Achado real corrigido: o rótulo pequeno `.heroi__assinatura` usava `--cor-rose` com contraste ≈3,3:1 sobre o fundo, abaixo do mínimo AA (4,5:1) para texto pequeno — criado o token `--cor-rose-texto` (≈5,2:1) e aplicado só nesse rótulo; o uso de `--cor-rose` no título grande (`.heroi__titulo em`) está correto porque esse texto é grande (≥36px, exige só 3:1). Confirmado por rolagem real: ordem das seções, conteúdo, alternância de halo/lado, botão de WhatsApp flutuante (não atrapalha nada no celular) e reveal de todas as seções (inclusive com `prefers-reduced-motion`) estão corretos — nenhum outro ajuste foi necessário.
+## Fora da página (pendências)
 
-## Revisão da página inteira (Facial · Corporal · Capilar · Kit Home Care · Contato)
-- Construídas nesta etapa: `src/componentes/faixa-tratamento.tsx` (faixa reutilizável, alterna lado do painel e acento de cor a cada seção) para Facial/Corporal/Capilar/Kit Home Care, e `src/componentes/contato.tsx` + `src/componentes/whatsapp-flutuante.tsx` (ícone oficial da marca, reaproveitado do padrão já usado em `hospital-day-mais-vida-v2`).
-- Observação real via Playwright (desktop 1440×900, celular 390×844, e desktop com `reducedMotion: reduce`): ritmo alternado confirmado (texto/painel trocam de lado e de cor emerald/rose a cada faixa, sem grade de cartões repetida); no celular cada faixa empilha texto → painel, mesma lógica da abertura; rodapé mostra WhatsApp, Instagram e Linktree reais, sem endereço/horário (decisão registrada acima); botão de WhatsApp flutuante visível e consistente.
-- **Nota de método de QA (corrigida na revisão independente)**: a primeira captura `fullPage` sem emular `reducedMotion` mostrou as faixas abaixo da dobra em branco, e inicialmente pareceu bastar emular `reducedMotion: reduce` para contornar (força todo `data-fx` a aparecer, sem depender do `IntersectionObserver`). A revisão independente testou exatamente essa captura (`fullPage` + `reducedMotion: reduce`) e encontrou um problema mais sério: além de não corrigir totalmente, ela colou um fragmento **fantasma** do rodapé ("Fale com a gente") logo após a abertura, antes mesmo de Facial/Corporal/Capilar aparecerem — um artefato de composição deste ambiente (Chromium headless sem GPU, renderização por software, páginas muito altas), não um bug da página. **Conclusão: não usar `fullPage` de jeito nenhum aqui, nem com `reducedMotion`.** O método confiável, usado para confirmar que a página está correta de verdade, é rolar programaticamente (`scrollTo`) e capturar cada posição em tamanho de viewport — foi assim que se confirmou a ordem real das seções (Hero → Facial → Corporal → Capilar → Kit Home Care → Contato, uma só vez cada) tanto em desktop quanto em celular.
-- Nenhum ajuste de layout foi necessário além dos já registrados na primeira dobra; nenhuma seção de Injetáveis/Botox nem de depoimentos foi construída (ver ordem das seções acima).
+Injetáveis/Botox (responsável técnico e conselho), depoimentos (sem avaliações reais),
+Ultramed e Lumine (cliente explicar), endereço e horário.

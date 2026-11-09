@@ -16,31 +16,43 @@
   font-display: swap;
 }
 
-/* Tokens extraídos da logo real (amostragem de pixel do arquivo
- * assets/img/logo-jady-emanuela.png), não inventados. Papéis definidos
- * em DESIGN-SYSTEM.md (próxima etapa); aqui só os valores. */
 :root {
   --cor-esmeralda: #0ea978;
   --cor-esmeralda-escura: #0b7a58;
   --cor-esmeralda-clara: #6fd9b8;
+  --cor-floresta: #0f3d31;
+  --cor-floresta-media: #145040;
   --cor-rose: #b07d6e;
   --cor-rose-clara: #e3bfae;
-  --cor-rose-texto: #8f5c4e; /* mesma família do dourado-rosé, escurecida só para
-    texto pequeno: --cor-rose sozinha fica em ~3.3:1 sobre --cor-fundo, abaixo do
-    mínimo AA (4.5:1) para texto normal; esta variante fica em ~5.2:1 */
+  --cor-rose-texto: #8f5c4e;
   --cor-fundo: #fbf8f2;
   --cor-fundo-alt: #f3ece1;
   --cor-texto: #2a2622;
   --cor-texto-suave: #6b645c;
+  --cor-creme-sobre-escuro: #f6efe4;
 
   --fonte-titulo: "Fraunces", ui-serif, Georgia, serif;
   --fonte-corpo: "Inter", system-ui, sans-serif;
+
+  --margem: clamp(1.25rem, 5vw, 4rem);
+  --largura: 1320px;
+  --corte: 1.5rem;
 
   color-scheme: light;
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 html,
@@ -53,7 +65,10 @@ body {
   background: var(--cor-fundo);
   color: var(--cor-texto);
   font-family: var(--fonte-corpo);
+  font-size: 1.0625rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 img {
@@ -65,11 +80,30 @@ a {
   color: inherit;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--cor-esmeralda);
+  outline-offset: 3px;
+}
+
 .pular {
   position: absolute;
   left: -9999px;
   top: 0;
-  background: var(--cor-esmeralda-escura);
+  background: var(--cor-floresta);
   color: #fff;
   padding: 0.75rem 1.25rem;
   border-radius: 0 0 0.5rem 0;
@@ -78,4 +112,126 @@ a {
 
 .pular:focus {
   left: 0;
+}
+
+.rotulo {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  text-decoration: none;
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.botao svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+}
+
+.botao--primario {
+  background: var(--cor-esmeralda-escura);
+  color: #fff;
+  box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--cor-esmeralda-escura) 80%, transparent);
+}
+
+.botao--primario:hover {
+  background: var(--cor-floresta-media);
+  transform: translateY(-2px);
+}
+
+.botao--claro {
+  background: var(--cor-creme-sobre-escuro);
+  color: var(--cor-floresta);
+}
+
+.botao--claro:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.botao--fio {
+  border: 1px solid currentColor;
+  color: inherit;
+}
+
+.botao--fio:hover {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .botao,
+  .botao:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Ações flutuantes */
+:root {
+  --flutuante-acento: var(--cor-esmeralda-escura);
+  --flutuante-acento-escuro: var(--cor-floresta);
+  --flutuante-superficie: var(--cor-fundo);
+  --flutuante-tinta: var(--cor-floresta);
+  --flutuante-fio: color-mix(in srgb, var(--cor-floresta) 22%, transparent);
+}
+
+/* Lapidação esmeralda (cantos chanfrados); cada uso ajusta --corte. */
+.gema {
+  clip-path: polygon(
+    var(--corte) 0,
+    calc(100% - var(--corte)) 0,
+    100% var(--corte),
+    100% calc(100% - var(--corte)),
+    calc(100% - var(--corte)) 100%,
+    var(--corte) 100%,
+    0 calc(100% - var(--corte)),
+    0 var(--corte)
+  );
+}
+
+/* Engaste: moldura rosé com a mesma lapidação. */
+.engaste {
+  position: relative;
+  isolation: isolate;
+}
+
+.engaste::before,
+.engaste::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  clip-path: polygon(
+    var(--corte) 0,
+    calc(100% - var(--corte)) 0,
+    100% var(--corte),
+    100% calc(100% - var(--corte)),
+    calc(100% - var(--corte)) 100%,
+    var(--corte) 100%,
+    0 calc(100% - var(--corte)),
+    0 var(--corte)
+  );
+}
+
+.engaste::before {
+  inset: var(--engaste-desvio, -0.9rem);
+  translate: var(--engaste-x, 0) var(--engaste-y, 0);
+  background: var(--engaste-cor, color-mix(in srgb, var(--cor-rose) 70%, transparent));
+}
+
+.engaste::after {
+  inset: calc(var(--engaste-desvio, -0.9rem) + 1px);
+  translate: var(--engaste-x, 0) var(--engaste-y, 0);
+  background: var(--engaste-fundo, var(--cor-fundo));
 }

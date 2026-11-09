@@ -1,87 +1,69 @@
 # Design system
 
-Critérios: `referencias/direcao-visual.md`. Documentado **retroativamente** a partir do que já foi
-implementado (Direção A "Selo e luz") em `src/index.css`, `src/componentes/*.css` e
-`src/motor/motor.css`, não decidido do zero — valores reais lidos do código, nada inventado.
+Redesenho completo em 2026-11-09 ("Lapidação esmeralda"; a forma em arco foi trocada no mesmo dia por parecer genérica). O usuário reprovou o layout anterior
+("Selo e luz": faixas vazias com "conteúdo chega em breve", halos desfocados no lugar de fotos) e
+pediu para manter só a paleta. A versão anterior está no git (commit `b2487fb`).
+Critérios: `referencias/direcao-visual.md`. Pesquisa: `DIRECAO-VISUAL.md`, seção 2026-11-09.
 
-- **Identidade e fontes das decisões:** `DIRECAO-VISUAL.md` (Direção A "Selo e luz") e `BRIEF.md`
-  (logo oficial, tom de voz real do Linktree/Instagram). Paleta extraída por amostragem de pixel
-  direta da logo (`src/assets/img/logo-jady-emanuela.png`), não estimada visualmente.
+## Cores (tokens em `src/index.css`)
 
-- **Cores, papéis e contraste** (tokens em `src/index.css`):
-  | Token | Valor | Papel |
-  |---|---|---|
-  | `--cor-esmeralda` | `#0ea978` | acento principal, gradiente de CTA e halo |
-  | `--cor-esmeralda-escura` | `#0b7a58` | texto de destaque (gradiente), início de gradiente de botão |
-  | `--cor-esmeralda-clara` | `#6fd9b8` | halo/glow decorativo (painéis, selo) |
-  | `--cor-rose` | `#b07d6e` | acento secundário (gradiente de título, halo) — só para texto grande (≥24px), ver abaixo |
-  | `--cor-rose-texto` | `#8f5c4e` | mesma família do dourado-rosé, escurecida para texto pequeno |
-  | `--cor-rose-clara` | `#e3bfae` | halo/glow decorativo |
-  | `--cor-fundo` | `#fbf8f2` | fundo principal (creme muito claro) |
-  | `--cor-fundo-alt` | `#f3ece1` | fundo de faixas alternadas (painéis, rodapé) |
-  | `--cor-texto` | `#2a2622` | texto principal |
-  | `--cor-texto-suave` | `#6b645c` | texto secundário/apoio |
+Paleta mantida, extraída por amostragem de pixel da logo real. Só entraram os tons "floresta",
+que são a mesma esmeralda escurecida para fundos escuros.
 
-  Contraste conferido (WCAG AA) nesta revisão: `--cor-texto-suave` sobre `--cor-fundo` ≈ 5,5:1 e
-  sobre `--cor-fundo-alt` ≈ 5,0:1 (ambos passam o mínimo de 4,5:1 para texto normal).
-  `--cor-rose` sobre `--cor-fundo` ≈ 3,3:1 — **insuficiente para texto pequeno** (mínimo 4,5:1),
-  mas correto para o uso em `.heroi__titulo em` porque esse texto é grande (≥36px, exige só 3:1).
-  O rótulo pequeno `.heroi__assinatura` usava `--cor-rose` diretamente e falhava o AA; corrigido
-  nesta revisão para `--cor-rose-texto` (≈5,2:1).
+| Token | Valor | Papel |
+|---|---|---|
+| `--cor-floresta` | `#0f3d31` | fundo escuro (véu do herói, especialidade, rodapé), títulos de tratamento |
+| `--cor-floresta-media` | `#145040` | hover do botão primário |
+| `--cor-esmeralda-escura` | `#0b7a58` | botão primário (texto branco ≈ 5,3:1) |
+| `--cor-esmeralda` | `#0ea978` | foco (`:focus-visible`), brilho da faixa escura |
+| `--cor-rose-clara` | `#e3bfae` | destaque de título sobre fundo escuro (≈ 7:1 sobre floresta) |
+| `--cor-rose-texto` | `#8f5c4e` | rótulos e chamadas sobre fundo claro (≈ 5,2:1) |
+| `--cor-fundo` / `--cor-fundo-alt` | `#fbf8f2` / `#f3ece1` | creme principal / creme da cena de tratamentos |
+| `--cor-texto` / `--cor-texto-suave` | `#2a2622` / `#6b645c` | texto (≥ 5:1 nos dois fundos claros) |
+| `--cor-creme-sobre-escuro` | `#f6efe4` | texto e botão claro sobre floresta |
 
-- **Tipografia, pesos e fontes locais:** `Fraunces` (variável, peso 300–600, serifada, títulos:
-  `--fonte-titulo`) e `Inter` (variável, peso 400–700, corpo: `--fonte-corpo`), ambas self-hosted em
-  `src/assets/fonts/*.woff2` com licença SIL OFL registrada em
-  `src/assets/fonts/LICENSE-Fraunces-e-Inter.txt`. Títulos de seção em peso 500; eyebrow/rótulos em
-  caixa alta com `letter-spacing` largo (0.14–0.18em).
+## Tipografia
 
-- **Escala de espaçamento, tamanhos, largura e grid:** container máximo `1280px`, padding lateral
-  fluido `clamp(1.25rem, 5vw, 3.5rem)`. Espaçamentos verticais de seção em `clamp()` (ex.
-  `clamp(3rem, 8vw, 5.5rem)` nas faixas de tratamento). Grid de duas colunas (`minmax(0,1fr)
-  minmax(0,1fr)`) no hero e nas faixas, colapsando para uma coluna em `max-width: 860px`
-  (breakpoint único do projeto até agora).
+Fraunces (títulos, pesos 300 a 500) e Inter (corpo), locais em `src/assets/fonts/`. Destaque por
+peso 300 + cor rosé, nunca itálico (o arquivo variável não tem itálico e o falso itálico fica
+ruim). Rótulos em caixa alta, 0,75rem, espaçamento 0,18em.
 
-- **Bordas, raios e ícones:** botões e pílulas em `border-radius: 999px` (cápsula); painéis de
-  imagem/halo das faixas em `1.5rem`; selo e avatar do cabeçalho em círculo (`50%`). Ícone de
-  WhatsApp próprio em SVG (`icone-whatsapp.tsx`), não biblioteca de ícones externa.
+## Forma, espaço e grade
 
-- **Imagens e uso autorizado:** única imagem real usada é a logo oficial da cliente
-  (`logo-jady-emanuela.png`), reaproveitada no cabeçalho (40px) e ampliada no hero (selo
-  360px/60vw) — uso autorizado por ser a própria marca do cliente. Painéis das faixas de
-  tratamento ainda não têm foto real (pendência do Canva/Heyzine): usam um halo gradiente decorativo
-  nas cores da marca como placeholder honesto, não imagem de banco.
+- **Linguagem de forma: lapidação esmeralda** (classe `.gema`, retângulo de cantos chanfrados por
+  `clip-path`, como a pedra no corte esmeralda e o diamante da logo). Cada uso muda `--corte`
+  (miniatura 0.85rem, colagem 1.1rem e 2.4rem, painel 2.75rem, especialidade até 4rem).
+  `.engaste` desenha a moldura rosé com a mesma lapidação (deslocada no propósito, em volta na
+  especialidade). O círculo fica para o selo: logo, foto pequena do propósito e uma foto da colagem. Botões em cápsula. Sem cartões retos.
+- Largura útil 1320px, margem lateral `clamp(1.25rem, 5vw, 4rem)`, um ponto de quebra em 900px.
 
-- **Componentes, biblioteca, finalidade e estados:** nenhuma biblioteca de componentes (Flowbite/
-  daisyUI) usada até agora — tudo é CSS próprio sobre a identidade real da marca, decisão adequada
-  porque os componentes construídos (hero, faixa alternada, botão CTA, botão flutuante) são simples
-  o bastante para não precisar de biblioteca; reavaliar se uma seção futura precisar de componente
-  mais complexo (ex. carrossel). Estados implementados: `:hover`/`:focus-visible` em todos os links e
-  botões (elevação + sombra mais forte); botão flutuante expande texto só em telas ≥46rem no hover.
+## Componentes (`src/componentes/`)
 
-- **Foco, teclado e acessibilidade:** link "Ir para o conteúdo" (`.pular`) via skip-link, visível só
-  no foco. `:focus-visible` com contorno de cor da marca (`--cor-rose`, 3px, offset 3px) no botão
-  flutuante; outros botões usam elevação+sombra no foco. Nav e seções com `aria-label`/
-  `aria-labelledby` reais. Selo do cabeçalho marcado `aria-hidden` (decorativo, nome já está em
-  texto ao lado); selo do hero tem `alt` descritivo real.
+| Componente | O que é | Origem |
+|---|---|---|
+| `heroi` | Desktop: foto de ponta a ponta com véu floresta e título por cima. Celular: texto logo abaixo do cabeçalho sobre o verde, foto lapidada depois | princípio de Casa Lunara (supahero.io) |
+| menu `<details>` | Painel no celular com links + WhatsApp + Instagram; funciona sem JS | princípio do Aveon (navbar.gallery) |
+| `manifesto` | Foto lapidada com engaste rosé deslocado e círculo menor sobreposto + frase "Realçar a sua beleza natural.", parágrafo e assinatura "Brilhe por você!" (celular: foto primeiro) | próprio (2ª versão; a frase com fotos em cápsula foi trocada) |
+| `tratamentos` | Desktop: abas WAI-ARIA (setas, Home, End), nomes numerados à esquerda, foto lapidada + texto ao lado. Celular e sem JS: lista corrida com miniatura lapidada e link de WhatsApp | próprio (a cena presa foi reprovada em 2026-11-09) |
+| `especialidade` | Faixa escura única: clareamento corporal, foto lapidada (corte grande) com engaste rosé fino | próprio |
+| `contato` | Colagem: duas lapidações de cortes diferentes e um círculo + CTA; rodapé floresta | próprio |
+| `acoes-flutuantes` | WhatsApp + seta "voltar ao topo" acima (aparece após 500px) | padrão do motor (`adaptadores/react-vite`) |
 
-- **Responsividade e movimento reduzido:** breakpoint único em `860px` (grid de duas colunas →
-  uma coluna) e `700px`/`46rem` para o botão flutuante (ícone+texto → só ícone). Contrato do motor
-  (`src/motor/motor.js`/`motor.css`, copiado de `motor/` e adaptado para React): elementos com
-  `data-fx` ficam na posição final sem JS (`html:not(.fx-js)`) e com `prefers-reduced-motion:
-  reduce` (`.fx-reduzido`) — confirmado nesta revisão que `.fx-reduzido [data-fx] { opacity:1
-  !important; transform:none !important }` força tudo visível, sem depender de scroll.
+Nenhuma biblioteca de componentes. Cada botão de tratamento abre o WhatsApp com mensagem pronta
+(`dados.ts`, função `whatsapp()`).
 
-- **Tokens CSS e arquivos de implementação:** tokens centrais em `src/index.css` (`:root`);
-  componentes em `src/componentes/{hero,faixa-tratamento,contato,whatsapp-flutuante}.css`; motor de
-  animação em `src/motor/{motor.js,motor.css}`.
+## Estados, acessibilidade e movimento
 
-## Observação de processo (revisão independente, 2026-11-07)
+- `:focus-visible` global em esmeralda, link "Ir para o conteúdo", `aria-labelledby` em todas as
+  seções, alt descritivo com "imagem ilustrativa"; fotos decorativas com alt vazio.
+- Motor `data-fx-*`: só revelações curtas (`surgir`, `subir`, `crescer`). Troca de aba com
+  fade curto, desligado em `prefers-reduced-motion`. Sem digitação, contador, paralaxe ou efeito que segue o mouse.
+- Sem legenda "Imagem ilustrativa" (removida a pedido em 2026-11-09); o alt descreve a cena.
 
-Capturas de página inteira (`page.screenshot({ fullPage: true })`) neste ambiente (Chromium
-headless sem GPU, renderização por software) produzem artefatos de composição em páginas muito
-altas: não só deixam seções fora da viewport inicial em branco (como já registrado em
-`WIREFRAME.md`), mas também colam fragmentos "fantasmas" de outras seções em posições erradas —
-confirmado mesmo com `reducedMotion: reduce`. **Não confiar em captura `fullPage` para páginas
-longas neste ambiente**; usar sempre captura por posição de rolagem real (`scrollTo` + screenshot de
-viewport, repetido a cada ~viewport de altura) para validar o resultado de verdade. A ordem real do
-DOM e o conteúdo de cada seção foram confirmados corretos (desktop e celular) por esse método.
+## Verificação (2026-11-09)
+
+Capturas por rolagem real (não `fullPage`) em 1440×900, 390×844 e 1440×900 com
+`reducedMotion: reduce`, mais o menu aberto no celular: `verificacao/jady-redesign/v2`, `v3`.
+Corrigidos durante a verificação: ordem de CSS (`index.css` agora é importado antes do App), etapas
+vazando sobre a faixa escura no modo reduzido, legenda e rodapé sob o botão flutuante, margens
+desalinhadas entre seções.

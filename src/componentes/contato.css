@@ -1,77 +1,177 @@
 .contato {
-  background: var(--cor-fundo-alt);
-  padding: clamp(3.5rem, 9vw, 6rem) clamp(1.25rem, 5vw, 3.5rem) clamp(2rem, 5vw, 3rem);
-  text-align: center;
+  padding: clamp(5rem, 12vw, 9rem) var(--margem);
 }
 
-.contato__caixa {
-  max-width: 640px;
+.contato__grade {
+  max-width: calc(var(--largura) - 2 * var(--margem));
   margin: 0 auto;
+  display: grid;
+  gap: 3.5rem;
+  align-items: center;
 }
 
-.contato__titulo {
-  font-family: var(--fonte-titulo);
-  font-weight: 500;
-  font-size: clamp(1.9rem, 4vw, 2.6rem);
-  margin: 0 0 0.75rem;
-  color: var(--cor-texto);
+.contato__colagem {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.6rem, 1.5vw, 1.25rem);
+  align-items: end;
+}
+
+.contato__foto {
+  width: 100%;
+  aspect-ratio: 3 / 5;
+  object-fit: cover;
+}
+
+.contato__foto--a {
+  --corte: 1.1rem;
+  object-position: 45% 30%;
+}
+
+.contato__foto--b {
+  --corte: 2.4rem;
+  aspect-ratio: 3 / 6.2;
+  object-position: 65% 50%;
+}
+
+.contato__foto--c {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  align-self: center;
+  object-position: 50% 50%;
 }
 
 .contato__texto {
-  font-size: 1.05rem;
+  display: grid;
+  gap: 1.4rem;
+  justify-items: start;
+}
+
+.contato__rotulo {
+  color: var(--cor-rose-texto);
+}
+
+.contato__titulo {
+  font-size: clamp(2.6rem, 6.5vw, 5.5rem);
+  color: var(--cor-floresta);
+  letter-spacing: -0.03em;
+}
+
+.contato__titulo span {
+  font-weight: 300;
+  color: var(--cor-rose-texto);
+}
+
+.contato__descricao {
+  max-width: 34ch;
   color: var(--cor-texto-suave);
-  margin: 0 0 1.75rem;
+  font-size: 1.1rem;
 }
 
-.contato .botao-whatsapp {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  background: linear-gradient(100deg, var(--cor-esmeralda-escura), var(--cor-esmeralda));
-  color: #fff;
-  font-weight: 600;
-  padding: 0.85rem 1.6rem;
-  border-radius: 999px;
-  box-shadow: 0 10px 25px -10px rgba(11, 122, 88, 0.55);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.contato__acoes {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
 }
 
-.contato .botao-whatsapp:hover,
-.contato .botao-whatsapp:focus-visible {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 30px -10px rgba(11, 122, 88, 0.65);
+.contato__telefone {
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
 }
 
-.botao-whatsapp__icone {
-  width: 20px;
-  height: 20px;
+@media (min-width: 900px) {
+  .contato__grade {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 8vw, 7rem);
+  }
 }
 
-.contato__redes {
-  margin-top: 1.75rem;
+/* --------------------------------------------------------------- rodapé */
+
+.rodape {
+  background: var(--cor-floresta);
+  color: var(--cor-creme-sobre-escuro);
+  padding: 4rem var(--margem) 2rem;
+}
+
+.rodape__grade {
+  max-width: calc(var(--largura) - 2 * var(--margem));
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--cor-creme-sobre-escuro) 18%, transparent);
+}
+
+.rodape__marca {
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  font-size: 0.95rem;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  line-height: 1.15;
 }
 
-.contato__redes a {
-  text-decoration: none;
-  color: var(--cor-texto-suave);
-  border-bottom: 1px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
+.rodape__marca img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 3px;
 }
 
-.contato__redes a:hover,
-.contato__redes a:focus-visible {
-  color: var(--cor-esmeralda-escura);
-  border-color: var(--cor-esmeralda-escura);
-}
-
-.contato__rodape {
-  margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+.rodape__marca small {
+  display: block;
+  font-family: var(--fonte-corpo);
   font-size: 0.8rem;
-  color: var(--cor-texto-suave);
+  opacity: 0.8;
+  margin-top: 0.3rem;
+}
+
+.rodape__frase {
+  font-family: var(--fonte-titulo);
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--cor-rose-clara);
+}
+
+.rodape__links {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.rodape__links a {
+  text-decoration: none;
+  width: fit-content;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.3s ease;
+}
+
+.rodape__links a:hover {
+  background-size: 100% 1px;
+}
+
+.rodape__base {
+  max-width: calc(var(--largura) - 2 * var(--margem));
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--cor-creme-sobre-escuro) 75%, transparent);
+  padding-bottom: 4.5rem;
+}
+
+@media (min-width: 900px) {
+  .rodape__grade {
+    grid-template-columns: 1.2fr 1fr auto;
+    align-items: center;
+  }
+
+  .rodape__base {
+    padding-bottom: 0;
+    padding-right: 5.5rem;
+  }
 }

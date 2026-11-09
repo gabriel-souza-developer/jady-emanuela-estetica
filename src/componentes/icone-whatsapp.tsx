@@ -1,6 +1,3 @@
-/* Ícone oficial da marca WhatsApp (path do logo), não um ícone de chat
- * genérico — mesmo componente usado em projetos/hospital-day-mais-vida-v2
- * (referencias/componentes.md "WhatsApp flutuante"). */
 export function IconeWhatsapp({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" className={className}>

@@ -1,0 +1,285 @@
+.tratamentos {
+  background: var(--cor-fundo-alt);
+  padding: clamp(4.5rem, 10vw, 8rem) var(--margem);
+}
+
+.tratamentos > * {
+  max-width: calc(var(--largura) - 2 * var(--margem));
+  margin-inline: auto;
+}
+
+.tratamentos__cabeca {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.tratamentos__rotulo {
+  color: var(--cor-rose-texto);
+  margin-bottom: 0.6rem;
+}
+
+.tratamentos__titulo {
+  font-size: clamp(2.4rem, 6vw, 4.75rem);
+  color: var(--cor-floresta);
+}
+
+.tratamentos__intro {
+  color: var(--cor-texto-suave);
+  max-width: 34ch;
+  font-size: 1.05rem;
+}
+
+/* ------------------------------------------------- celular: lista corrida */
+
+.trat-abas {
+  display: none;
+}
+
+.trat-lista {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2.25rem;
+}
+
+.trat-lista__item {
+  display: grid;
+  grid-template-columns: 6.75rem 1fr;
+  column-gap: 1.1rem;
+  row-gap: 0.85rem;
+  align-items: end;
+  padding-bottom: 2.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--cor-floresta) 14%, transparent);
+}
+
+.trat-lista__item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.trat-lista__moldura {
+  aspect-ratio: 3 / 4;
+  --corte: 0.85rem;
+  background: var(--cor-floresta);
+}
+
+.trat-lista__moldura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trat-lista__topo {
+  display: grid;
+  gap: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.trat-lista__num {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--cor-rose-texto);
+}
+
+.trat-lista__nome {
+  font-size: 1.75rem;
+  color: var(--cor-floresta);
+  line-height: 1.05;
+}
+
+.trat-lista__chamada {
+  font-family: var(--fonte-titulo);
+  font-weight: 300;
+  color: var(--cor-rose-texto);
+  font-size: 1.05rem;
+}
+
+.trat-lista__descricao,
+.trat-lista__link {
+  grid-column: 1 / -1;
+}
+
+.trat-lista__descricao {
+  color: var(--cor-texto-suave);
+  font-size: 0.98rem;
+}
+
+.trat-lista__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-self: start;
+  min-height: 2.75rem;
+  font-weight: 600;
+  color: var(--cor-esmeralda-escura);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+/* --------------------------------------------------- desktop com JS: abas */
+
+@media (min-width: 900px) {
+  .tratamentos__cabeca {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 3rem;
+  }
+
+  .fx-js .trat-lista {
+    display: none;
+  }
+
+  .fx-js .trat-abas {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.8fr) 2fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+  }
+
+  /* Sem JS no desktop: a lista corrida vira duas colunas */
+  html:not(.fx-js) .trat-lista {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+  }
+}
+
+.trat-abas__lista {
+  display: grid;
+  border-top: 1px solid color-mix(in srgb, var(--cor-floresta) 14%, transparent);
+}
+
+.trat-abas__aba {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.15rem 0.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--cor-floresta) 14%, transparent);
+  color: var(--cor-texto-suave);
+  transition: color 0.25s ease;
+}
+
+.trat-abas__aba:focus-visible {
+  outline: 3px solid var(--cor-esmeralda);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+.trat-abas__num {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.trat-abas__nome {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+  line-height: 1.1;
+}
+
+.trat-abas__aba svg {
+  opacity: 0;
+  transform: translateX(-0.5rem);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.trat-abas__aba:hover {
+  color: var(--cor-texto);
+}
+
+.trat-abas__aba[aria-selected="true"] {
+  color: var(--cor-floresta);
+}
+
+.trat-abas__aba[aria-selected="true"] .trat-abas__num {
+  color: var(--cor-rose-texto);
+}
+
+.trat-abas__aba[aria-selected="true"] svg,
+.trat-abas__aba:hover svg {
+  opacity: 1;
+  transform: none;
+}
+
+.trat-abas__painel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+  animation: painel-entrar 0.45s ease both;
+}
+
+.trat-abas__moldura {
+  aspect-ratio: 4 / 5;
+  max-height: 36rem;
+  --corte: 2.75rem;
+  background: var(--cor-floresta);
+}
+
+.trat-abas__moldura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trat-abas__texto {
+  display: grid;
+  gap: 0.7rem;
+  justify-items: start;
+}
+
+.trat-abas__contagem {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--cor-rose-texto);
+}
+
+.trat-abas__contagem span {
+  color: var(--cor-texto-suave);
+  font-weight: 400;
+}
+
+.trat-abas__titulo {
+  font-size: clamp(2.4rem, 4vw, 3.75rem);
+  color: var(--cor-floresta);
+}
+
+.trat-abas__chamada {
+  font-family: var(--fonte-titulo);
+  font-weight: 300;
+  font-size: 1.4rem;
+  color: var(--cor-rose-texto);
+}
+
+.trat-abas__descricao {
+  color: var(--cor-texto-suave);
+  max-width: 36ch;
+  margin-bottom: 0.6rem;
+}
+
+@keyframes painel-entrar {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trat-abas__painel {
+    animation: none;
+  }
+  .trat-abas__aba,
+  .trat-abas__aba svg {
+    transition: none;
+  }
+}
